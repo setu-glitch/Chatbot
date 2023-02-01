@@ -1,2 +1,2 @@
 # Chatbot
-A machine learning based chatbot is a type of conversational AI system that uses data and algorithms to understand and respond to human queries.
+A machine learning based chatbot is a type of conversational AI system that uses data and algorithms to understand and respond to human queries. It can be trained on large datasets to recognize patterns and improve its responses over time. The chatbot uses various techniques such as natural language processing and deep learning to interpret user inputs and provide relevant answers. These chatbots can be integrated into various platforms such as websites, messaging apps, and virtual assistants to enhance customer experience and automate repetitive tasks.
