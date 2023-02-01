@@ -7,14 +7,15 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 You will need to install the following software:
 
-*Python 3.x
-*Pip
+- Python 3.x
+- TensorFlow
+- Keras
 
 ### Runinng the Chatbot
 To start the chatbot, run the following command in your terminal:
 
-- python chatbot.py
+*python chatbot.py*
 
 ## Built With
-*Python - The programming language used
-*Tensorflow - The machine learning framework used
+- Python - The programming language used
+- Tensorflow - The machine learning framework used
