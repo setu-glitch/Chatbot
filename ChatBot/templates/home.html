@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+  <title>Chatbot</title>
+  <head>
+    <link href="https://fonts.maateen.me/bensen/font.css" rel="stylesheet" />
+    <link rel="icon" href="https://www.favicon.cc/logo3d/918451.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+      body {
+        font-family: "BenSen", sans-serif;
+      }
+      h1 {
+        font-size: 40px;
+        font-weight: 900;
+        outline: none;
+        text-transform: uppercase;
+        background: linear-gradient(
+          135deg,
+          #5335cf 0%,
+          #de005e 25%,
+          #f66e48 50%,
+          #de005e 75%,
+          #5335cf 100%
+        );
+        background-size: 400%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: animate 10s linear infinite;
+        text-align: center;
+        margin-top: -35px;
+      }
+      h2 {
+        font-size: 20px;
+        font-weight: 100;
+        outline: none;
+        background: linear-gradient(
+          135deg,
+          #ffffff 0%,
+          #de005e 25%,
+          #727272 50%,
+          #745562 75%,
+          #514d61 100%
+        );
+        background-size: 400%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: animate 10s linear infinite;
+        text-align: center;
+      }
+      h3 {
+        font-size: 20px;
+        font-weight: 800;
+        outline: none;
+        background: linear-gradient(
+          135deg,
+          #ffffff 0%,
+          #de005e 25%,
+          #727272 50%,
+          #745562 75%,
+          #514d61 100%
+        );
+        background-size: 400%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: animate 15s linear infinite;
+        text-align: center;
+      }
+      @keyframes animate {
+        to {
+          background-position: 400%;
+        }
+      }
+      #chatbox {
+        margin-left: auto;
+        margin-right: auto;
+        width: 60%;
+        margin-top: 30px;
+      }
+
+      #textInput {
+        margin-left: 30%;
+        margin-right: 30%;
+        margin-top: 50px;
+        margin-bottom: 30px;
+        width: 50%;
+        height: 40px;
+        border-bottom: 3px solid rgb(255, 255, 255);
+        font-family: "BenSen", sans-serif;
+        border: 2px solid red;
+        border-radius: 30px;
+        font-size: 17px;
+        text-align: left;
+        box-sizing: border-box;
+        background-color: rgb(40, 39, 39);
+        -webkit-transition: 0.5s;
+        transition: 0.5s;
+        outline: none;
+        color: white;
+      }
+      #textInput:focus {
+        background-color: #000000;
+        color: rgb(255, 255, 255);
+        height: 45px;
+        margin-left: 10px;
+      }
+      .userText {
+        color: rgb(0, 0, 0);
+        font-family: "BenSen", sans-serif;
+        font-size: 15px;
+        text-align: right;
+        line-height: 30px;
+      }
+      .userText span {
+        background: linear-gradient(135deg, #ffffff 0%, #b8b7b8 100%);
+        padding: 10px;
+        border-radius: 30px;
+      }
+      .botText {
+        color: white;
+        font-family: "BenSen", sans-serif;
+        font-size: 15px;
+        text-align: left;
+        line-height: 30px;
+      }
+      .botText span {
+        background: linear-gradient(135deg, #fa036e 0%, #94052b 100%);
+        backdrop-filter: blur(20px);
+        padding: 10px;
+        border-radius: 30px;
+      }
+      #tidbit {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 300px;
+      }
+      .boxed {
+        margin-left: auto;
+        margin-right: auto;
+        width: 70%;
+        margin-top: 40px;
+        border: 5px solid rgb(128, 0, 66);
+        border-radius: 30px;
+      }
+    </style>
+  </head>
+  <body background="https://cdn.wallpapersafari.com/33/45/5YmTDJ.jpg">
+    <img />
+    <center>
+      <img
+        src="https://static.wixstatic.com/media/61a289_093a216c5c494d3d8cd3d88a437e542e~mv2.gif"
+        alt="Heading"
+        style="width: 400px; height: auto; margin-top: -40px"
+      />
+      <h1>Chatbot</h1>
+    </center>
+    <div class="box"></div>
+    <div class="boxed">
+      <div>
+        <div id="chatbox">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/2040/2040946.png"
+            alt="THANOS"
+            style="width: 100px; height: auto"
+          />
+          <p class="botText">
+            <span>Hello, sir! I am Thanos. Your Personal Assistant.</span>
+          </p>
+        </div>
+        <div id="userInput">
+          <input
+            id="textInput"
+            type="text"
+            name="msg"
+            placeholder="  Type here . . ."
+          />
+        </div>
+      </div>
+      <script>
+        function getBotResponse() {
+          var rawText = $("#textInput").val();
+          var userHtml = '<p class="userText"><span>' + rawText + "</span></p>";
+          $("#textInput").val("");
+          $("#chatbox").append(userHtml);
+          document
+            .getElementById("userInput")
+            .scrollIntoView({ block: "start", behavior: "smooth" });
+          $.get("/get", { msg: rawText }).done(function (data) {
+            var botHtml = '<p class="botText"><span>' + data + "</span></p>";
+            $("#chatbox").append(botHtml);
+            document
+              .getElementById("userInput")
+              .scrollIntoView({ block: "start", behavior: "smooth" });
+          });
+        }
+        $("#textInput").keypress(function (e) {
+          if (e.which == 13) {
+            getBotResponse();
+          }
+        });
+      </script>
+    </div>
+  </body>
+</html>
